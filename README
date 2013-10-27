@@ -4,6 +4,12 @@ Generate pallet image: stack reels optimally on a pallet
  
 Sample outputs:
 https://github.com/Boran/pallet.legacy/blob/master/samples/sample1.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample2.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample3.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample4.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample5.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample6.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample7.jpg
 
 Uses imagemagick libaary, tested on Ubuntu 12.04
 
