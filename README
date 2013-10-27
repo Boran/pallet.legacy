@@ -1,8 +1,12 @@
-Generate pallet image
+
+Generate pallet image: stack reels optimally on a pallet
  * With layout of reels for 5 different scenarios
  * Inputs are provided via web parameters.
- This is a poorly documented custom script, sorry.
- It uses immagemagick
+
+Uses immagemagick libaby, tested on Ubuntu 12.04
+
+This is a poorly documented custom script, sorry.
+A cleaned up version based on Symfony2 will be published on https://github.com/Boran/pallet but the idea is to first publish the simple, original, working release.
 
  Install
  * Needs to be in /var/www/jobweb/pallet really.
