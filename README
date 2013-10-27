@@ -1,8 +1,11 @@
 Generate pallet image: stack reels optimally on a pallet
  * With layout of reels for 5 different scenarios
  * Inputs are provided via web parameters.
+ 
+Sample outputs:
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample1.jpg
 
-Uses immagemagick libaary, tested on Ubuntu 12.04
+Uses imagemagick libaary, tested on Ubuntu 12.04
 
 This is a poorly documented custom script, sorry.
 A cleaned up version with a GUI based on Symfony2 will be published on https://github.com/Boran/pallet,
