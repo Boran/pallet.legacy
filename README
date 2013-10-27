@@ -8,5 +8,29 @@ Uses immagemagick libaby, tested on Ubuntu 12.04
 This is a poorly documented custom script, sorry.
 A cleaned up version based on Symfony2 will be published on https://github.com/Boran/pallet but the idea is to first publish the simple, original, working release.
 
- Install
- * Needs to be in /var/www/jobweb/pallet really.
+Example usage:
+(see images in the samples diretcory)
+http://192.168.10.128/pallet.legacy/index.php?diam_mm=200&rollwidth_mm=500&layout=verint&rows=1
+http://192.168.10.128/pallet.legacy/index.php?diam_mm=350&rollwidth_mm=500&layout=verint&rows=1
+http://192.168.10.128/pallet.legacy/index.php?diam_mm=200&rollwidth_mm=500&layout=versq&rows=3
+http://192.168.10.128/pallet.legacy/index.php?diam_mm=200&rollwidth_mm=500&layout=horsq&rows=2
+http://192.168.10.128/pallet.legacy/index.php?diam_mm=200&rollwidth_mm=500&layout=horint&rows=2
+http://192.168.10.128/pallet.legacy/index.php?diam_mm=200&rollwidth_mm=500&layout=horpyr&rows=4
+http://192.168.10.128/pallet.legacy/index.php?diam_mm=300&rollwidth_mm=500&layout=horpyr&rows=3
+
+Install
+- extract into /var/www/pallet.legacy
+- install imagemagick, e.g. un ubuntu 12.04 server:
+ apt-get install imagemagick php5-dev
+ apt-get install libmagick-dev
+ /usr/bin/convert -version
+ apt-get remove graphicsmagick-libmagick-dev-compat imagemagick imagemagick-common
+ apt-get autoremove
+ apt-get install libmagickwand-dev
+ pecl install imagick-beta
+ vi /etc/php5/conf.d/imagick.ini
+     extension=imagick.so
+
+Troubleshooting
+  Logging is done to syslog, and of course /var/log/apache2/error.log
+  See also $debug_flag1 and $debug_to_syslog=TRUE

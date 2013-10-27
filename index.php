@@ -10,9 +10,11 @@
   
  */
 
-//------ defaults ----------------
+// troubleshooting
 $debug_flag1=TRUE;
-$debug_to_syslog=FALSE;
+$debug_to_syslog=TRUE;
+
+//------ defaults ----------------
 
 // Pallet canvas size on the screen
 //$pwidth=120;  // pallet width/dept in pixels
@@ -23,22 +25,27 @@ $image_ver='/reelv.jpg';   // reelv2.png
 $image_hor='/reelh.jpg';
 $heightwarning='';
 
-// paths
-//include_once "config.inc";
 include_once "./funcs.inc";
 
-$web="/var/www/";
-$d="jobweb/pallet";
-$dir=$web . $d;
-#$prog=$argv[0];
-$prog="$dir/index.php";
+// Directories where our script in, where output is stored.
+$dir=dirname(__FILE__);
+$outdir=$dir . '/out';
+$outdirweb = dirname($_SERVER['REQUEST_URI']) . '/out/';
+$prog="$dir/index.php";  // @todo: automated
+
 define_syslog_variables();
 openlog($prog, LOG_PID | LOG_PERROR, LOG_DAEMON);
 
+if (!is_writable($outdir)) {
+    logit('creating ' . $outdir);
+    if (!mkdir($outdir, 700, true)) {
+        die('Cannot create output directory ' . $outdir);
+    }
+}
 
 // parameters later
 if (! isset($argc)) {   # web call
-  /* Note: some arguement are allow as both GET and POST, for easier debugging
+  /* Note: some arguements are allow as both GET and POST, for easier debugging
    */
   // Generic parameters
   //if (isset($_POST['file']))      {$f=$_POST['file']; }        else { $f='WEB'; } // output.jpg
@@ -64,9 +71,11 @@ if (! isset($argc)) {   # web call
   if (isset($_POST['MaxLoadingWeight']))  {$MaxLoadingWeight=$_POST['MaxLoadingWeight'];} else { $MaxLoadingWeight=800; }
   if (isset($_POST['rollkgs']))           {$rollkgs=$_POST['rollkgs'];} else { $rollkgs=0; }
 
+  // @todo security: stripping of arguments to only neededed chracters
+
   //if (isset($_POST['debug_flag1']))  {$debug_flag1=$_POST['debug_flag1'];}    else { $debug_flag1=FALSE; }
 
-} else {
+} else {  // default values
   $rows=1;
   $diam_mm=300;
   $rollwidth_mm=300;
@@ -75,7 +84,6 @@ if (! isset($argc)) {   # web call
   $layout='versq';
   var_dump($argv);
 }
-
 
 
 // ---------------------
@@ -105,9 +113,14 @@ debug1($str);
 //$pallet = new Imagick($dir . '/pallet.png');
 //$palletprops = $pallet->getImageGeometry();
 // canvas: is 2D pallet: add enough space for 3d overhang
-$result = new Imagick();   // create new canvas for pallet + stacked rolls
-$result->newImage($plength+3*$radius, $pwidth+3*$radius, 'white'); 
-// add picture: $result->compositeImage($pallet, imagick::COMPOSITE_OVER, 0, $palletyoffset);
+// create new canvas for pallet + stacked rolls
+//$result = new Imagick();
+try
+{
+  $result = new Imagick();
+
+  $result->newImage($plength+3*$radius, $pwidth+3*$radius, 'white');
+  // add picture: $result->compositeImage($pallet, imagick::COMPOSITE_OVER, 0, $palletyoffset);
   $rect = new ImagickDraw();    // the wooden part of the pallet
   $rect->setStrokeColor('SaddleBrown');
   $rect->setStrokeWidth(1);
@@ -131,7 +144,11 @@ $result->newImage($plength+3*$radius, $pwidth+3*$radius, 'white');
   //$rect->line(0,$pwidth+2, $plength+2, $pwidth+2);
   $result->drawImage($rect);
 
-
+}
+catch(Exception $e)
+{
+    die('Error Imagick: ' . $e->getMessage() );
+}
 
 // ---------- Each reel ----
 //$reel   = new Imagick($dir . $image_ver);
@@ -450,8 +467,16 @@ if ($f == 'download') {
 } else {
   //$result->scaleImage(75, 90); // reduce to thumbnail
   //$result->scaleImage(200, 240); // increase
-  $result->writeImage($dir . '/out/' . $f);       // Write to disk
-  echo "<img src=/$d/out/$f alt='Generated image'>";
+  try
+  {
+    $result->writeImage($outdir . '/' . $f);       // Write to disk
+  }
+  catch(Exception $e)
+  {
+      die('Error Imagick: ' . $e->getMessage() );
+  }
+  //echo "<img src=/$d/out/$f alt='Generated image'>";
+  echo "<img src=$outdirweb$f alt='Generated image'>";
 }
 //echo "<img src=/$d/out/output2.jpg alt='Generated image'>";
 $result->destroy();
