@@ -1,0 +1,8 @@
+Generate pallet image
+ * With layout of reels for 5 different scenarios
+ * Inputs are provided via web parameters.
+ This is a poorly documented custom script, sorry.
+ It uses immagemagick
+
+ Install
+ * Needs to be in /var/www/jobweb/pallet really.
