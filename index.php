@@ -11,8 +11,8 @@
  */
 
 // troubleshooting
-$debug_flag1=TRUE;
-$debug_to_syslog=TRUE;
+$debug_flag1=TRUE;  // can also be sent as an URL argument debug_flag1=1
+$debug_to_syslog=FALSE;
 
 //------ defaults ----------------
 
