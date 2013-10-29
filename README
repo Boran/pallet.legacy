@@ -1,15 +1,23 @@
-
 Generate pallet image: stack reels optimally on a pallet
  * With layout of reels for 5 different scenarios
  * Inputs are provided via web parameters.
+ 
+Sample outputs:
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample1.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample2.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample3.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample4.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample5.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample6.jpg
+https://github.com/Boran/pallet.legacy/blob/master/samples/sample7.jpg
 
-Uses immagemagick libaby, tested on Ubuntu 12.04
+Uses imagemagick libaary, tested on Ubuntu 12.04
 
 This is a poorly documented custom script, sorry.
-A cleaned up version based on Symfony2 will be published on https://github.com/Boran/pallet but the idea is to first publish the simple, original, working release.
+A cleaned up version with a GUI based on Symfony2 will be published on https://github.com/Boran/pallet,
+the idea here is to first publish the simple, original, working release.
 
 Example usage:
-(see images in the samples diretcory)
 http://192.168.10.128/pallet.legacy/index.php?diam_mm=200&rollwidth_mm=500&layout=verint&rows=1
 http://192.168.10.128/pallet.legacy/index.php?diam_mm=350&rollwidth_mm=500&layout=verint&rows=1
 http://192.168.10.128/pallet.legacy/index.php?diam_mm=200&rollwidth_mm=500&layout=versq&rows=3
@@ -17,6 +25,7 @@ http://192.168.10.128/pallet.legacy/index.php?diam_mm=200&rollwidth_mm=500&layou
 http://192.168.10.128/pallet.legacy/index.php?diam_mm=200&rollwidth_mm=500&layout=horint&rows=2
 http://192.168.10.128/pallet.legacy/index.php?diam_mm=200&rollwidth_mm=500&layout=horpyr&rows=4
 http://192.168.10.128/pallet.legacy/index.php?diam_mm=300&rollwidth_mm=500&layout=horpyr&rows=3
+(see images in the samples directory)
 
 Install
 - extract into /var/www/pallet.legacy
