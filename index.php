@@ -71,9 +71,9 @@ if (! isset($argc)) {   # web call
   if (isset($_POST['MaxLoadingWeight']))  {$MaxLoadingWeight=$_POST['MaxLoadingWeight'];} else { $MaxLoadingWeight=800; }
   if (isset($_POST['rollkgs']))           {$rollkgs=$_POST['rollkgs'];} else { $rollkgs=0; }
 
-  // @todo security: stripping of arguments to only neededed chracters
+  // @todo security: stripping of arguments to only needed chracters
 
-  //if (isset($_POST['debug_flag1']))  {$debug_flag1=$_POST['debug_flag1'];}    else { $debug_flag1=FALSE; }
+  if (isset($_GET['debug_flag1']))  {$debug_flag1=$_GET['debug_flag1'];}
 
 } else {  // default values
   $rows=1;
